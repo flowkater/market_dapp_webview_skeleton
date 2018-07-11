@@ -1,37 +1,17 @@
 import React, { Component } from 'react';
-import { uniq } from "../utils/libs";
+import { uniq, productStatus, productCondition } from "../utils/libs";
+import { Link } from 'react-router-dom'
+import axios from 'axios';
 
 class ProductList extends Component {
   state = {
     products : [
-      {
-        id: 1, 
-        name: 'Mastering Bitcoin', 
-        category: 'IT Book', 
-        imageLink: 'QmdxLyAeTRXCkNmwQYaJkYfeoGYD5sDeLfhnsXpU47g3pW', 
-        descLink: 'QmbZFDi8P4jeKnNCN7JJJ7rdBWVhKn8qT1NSnGSLnxTyZW',
-        price: 2000000,
-        codition: 1
-      },
-      {
-        id: 2, 
-        name: 'Core Ethereum Programming', 
-        category: 'IT Book', 
-        imageLink: 'QmT6EqsJEzuQLnov9opAkwnbHkKSdSjWxDMrZuTAD22DrK', 
-        descLink: 'QmZhB9Rkr2zrx9ST4YHKAeFbj6qwydLQLUidY9VYUGw2QL',
-        price: 1000000,
-        codition: 0
-      },
-      {
-        id: 3, 
-        name: 'What is the Blockchain?', 
-        category: 'IT Book', 
-        imageLink: 'QmWxDNXbhYMiMKRjTqeFsue2E2ejXCQXB319FU5oNzYipT', 
-        descLink: 'QmRpRGJRvs5MG4zfnvXDTySuaBU6WcziyXAEiipY3xjgdb',
-        price: 3000000,
-        codition: 0
-      }
     ]
+  }
+
+  
+  componentWillMount() {
+    
   }
 
 
@@ -92,7 +72,9 @@ class Product extends Component {
         <div>Name: {product.name}</div>
         <div>Category: {product.category}</div>
         <div>가격: {product.price} Wei</div>
-        <div>상태: {product.condition}</div>
+        <div>사용: {product ? productCondition(product.condition) : null}</div>
+        <div>상태: {product ? productStatus(product.status) : null}</div>
+        <div><Link to={`/products/` + product.blockchainId}>제품 상세 정보</Link></div>
       </div>
     );
   }

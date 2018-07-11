@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { setWeb3Instance, saveProduct } from "../utils/blockChainService";
 
 class UploadProduct extends Component {
   state = {
@@ -53,7 +54,10 @@ class UploadProduct extends Component {
     e.preventDefault();
     let reader = new window.FileReader();
     reader.readAsArrayBuffer(this.state.image);
-    console.log(this.state);
+
+    setWeb3Instance()
+    .then(() => saveProduct(reader, this.state))
+    .then(() => this.setState({show: true, name: '', description: '', image: null, category: '', price: 0, condition: 0}))
   }
 
   
